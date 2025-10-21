@@ -3,7 +3,7 @@
 ## 🔹 Complejidad Computacional
 
 <details>
-<summary>**¿Qué estudia la complejidad computacional?**</summary>
+##<summary>¿Qué estudia la complejidad computacional?</summary>
 Analiza el tiempo y los recursos necesarios para ejecutar un algoritmo según el tamaño de la entrada.
 </details>
 
