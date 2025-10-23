@@ -8,18 +8,18 @@ Analiza el tiempo y los recursos necesarios para ejecutar un algoritmo según el
 </details>
 
 <details>
-<summary>**¿Cuál es la forma habitual de medir el tiempo de ejecución de un algoritmo?**</summary>
+<summary><b>¿Cuál es la forma habitual de medir el tiempo de ejecución de un algoritmo?</b></summary>
 Evaluando el peor caso en función del tamaño de la entrada del algoritmo.
 </details>
 
 <details>
-<summary>**En el contexto de la Notación O grande (Big O), si $f \in O(g)$, ¿qué significa intuitivamente esta relación para valores grandes de $n$?**</summary>
+<summary><b>En el contexto de la Notación O grande (Big O), si $f \in O(g)$, ¿qué significa intuitivamente esta relación para valores grandes de $n$?</b></summary>
 La función g(n) "le gana" a f(n) o f(n) crece a lo sumo tan rápido como g(n).
 La definición formal de f∈O(g) implica que existe un factor α y un n0 tal que f(n)≤αg(n) para todo n≥n0
 </details>
 
 <details>
-<summary>**¿qué modelo se utiliza para los análisis de complejidad computacional en la materia, asumiendo que cada dato individual ocupa una posición de memoria?**</summary>
+<summary><b>¿qué modelo se utiliza para los análisis de complejidad computacional en la materia, asumiendo que cada dato individual ocupa una posición de memoria?</b></summary>
 Modelo uniforme
 El modelo uniforme asume que cada dato individual ocupa una posición individual de memoria y es el modelo de base para el análisis en el contexto de la materia
 </details>
