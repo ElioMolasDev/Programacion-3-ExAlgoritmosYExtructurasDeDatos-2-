@@ -13,12 +13,6 @@ Evaluando el peor caso en función del tamaño de la entrada del algoritmo.
 </details>
 
 <details>
-<summary><b>En el contexto de la Notación O grande (Big O), si $f \in O(g)$, ¿qué significa intuitivamente esta relación para valores grandes de $n$?</b></summary>
-La función g(n) "le gana" a f(n) o f(n) crece a lo sumo tan rápido como g(n).
-La definición formal de f∈O(g) implica que existe un factor α y un n0 tal que f(n)≤αg(n) para todo n≥n0
-</details>
-
-<details>
 <summary><b>¿qué modelo se utiliza para los análisis de complejidad computacional en la materia, asumiendo que cada dato individual ocupa una posición de memoria?</b></summary>
 Modelo uniforme
 El modelo uniforme asume que cada dato individual ocupa una posición individual de memoria y es el modelo de base para el análisis en el contexto de la materia
