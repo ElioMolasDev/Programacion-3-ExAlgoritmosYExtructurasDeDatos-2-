@@ -49,15 +49,16 @@
 </details>
 
 <details> <summary><b>Ejemplo de test unitario básico en JUnit</b></summary>
-```java
+<code> 
 @Test
 public void cumplirAniosTest() {
     Persona p = new Persona("Pepe", 17); // Setup
     p.cumplirAnios();                    // Exercise
     assertEquals(18, p.getEdad());       // Verify
 }
+</code>
 Este test verifica que el método cumplirAnios() incremente correctamente la edad de una persona.
-</details>```
+</details>
 
 <details> <summary><b>¿Cómo se ejecutan los tests unitarios en Eclipse?</b></summary> 
     Seleccionando la clase de prueba y eligiendo Run As → JUnit Test. JUnit ejecuta todos los métodos con la anotación <code>@Test</code>. 
@@ -68,17 +69,19 @@ Este test verifica que el método cumplirAnios() incremente correctamente la eda
     Son métodos que verifican condiciones durante el test. Si la condición no se cumple, el test **falla automáticamente**. 
 </details>
 
-<details> <summary><b>¿Cuáles son las principales assertions de JUnit?</b></summary>
-|Método	|Descripción|
-| :--- | :--- |
-|assertEquals(expected, actual)	|Verifica igualdad entre valores|
-|assertArrayEquals(expected, actual)|	Compara arreglos.|
-|assertTrue(cond) / assertFalse(cond)|	Evalúa condiciones booleanas.|
-|assertNull(obj) / assertNotNull(obj)|	Verifica nulidad.|
-|fail(msg)	|Fuerza un fallo explícito.|
->
+<details>
+  <summary><b>¿Cuáles son las principales assertions de JUnit?</b></summary>
+
+| Método                          | Descripción                          |
+| :---                          | :---                               |
+| `assertEquals(expected, actual)`   | Verifica igualdad entre valores    |
+| `assertArrayEquals(expected, actual)` | Compara arreglos.               |
+| `assertTrue(cond) / assertFalse(cond)` | Evalúa condiciones booleanas.     |
+| `assertNull(obj) / assertNotNull(obj)` | Verifica nulidad.               |
+| `fail(msg)`                    | Fuerza un fallo explícito.         |
 </details>
-🏷️ Anotaciones Importantes
+
+## 🏷️ Anotaciones Importantes
 <details> <summary><b>¿Para qué sirve <code>@Test</code>?</b></summary> Indica que el método es un caso de prueba. </details>
 <details> <summary><b>¿Qué hace <code>@Before</code>?</b></summary> Ejecuta un método **antes de cada test**, normalmente para inicializar datos o preparar el entorno. </details>
 <details> <summary><b>¿Qué hace <code>@After</code>?</b></summary> Ejecuta un método **después de cada test**, generalmente para liberar recursos o limpiar el entorno. </details>
@@ -199,5 +202,6 @@ Crear un test antes de corregir un bug.
 </details>
 <details> <summary><b>¿Por qué escribir un test antes de corregir un bug?</b></summary> Para garantizar que el bug se reproduce, que se corrige efectivamente y que **no vuelva a aparecer** en el futuro. </details>
 <details> <summary><b>¿Qué recomendación hace Alex Iskold sobre testing?</b></summary> > “Al principio parece trabajo extra, pero una vez que empezás a escribir tests, te preguntás cómo programabas sin ellos.” También recomienda practicarlo en **parejas (pair testing)** para hacerlo más productivo y divertido. </details>
+
 
 
