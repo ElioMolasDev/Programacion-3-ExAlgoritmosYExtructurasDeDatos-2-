@@ -76,7 +76,7 @@ Detección temprana de errores: los fallos se descubren al escribir el código.
 
 * Reducción del uso del depurador: los tests localizan el error rápidamente.
 
-##🧱 Buenas prácticas
+## 🧱 Buenas prácticas
 * Escribir las pruebas antes o junto al código.
 
 * Empezar con casos simples y avanzar a los límites o excepciones.
