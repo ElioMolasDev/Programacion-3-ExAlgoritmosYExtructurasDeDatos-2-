@@ -38,15 +38,16 @@ Se usa para encontrar componentes conexas, detectar ciclos, calcular ordenamient
 ## ⚙️ Complejidad de los Recorridos
 
 <details> <summary><b>¿Cuál es la complejidad de recorrer un grafo representado con una matriz de adyacencia?</b></summary> 
-La obtención de vecinos cuesta `O(n)` por vértice, por lo que la complejidad total del recorrido es `O(n²)`. 
+Obtener los vecinos de un vértice cuesta O(n), por lo que el recorrido completo cuesta O(n²) 
 </details>
 
 <details> <summary><b>¿Cuál es la complejidad de recorrer un grafo representado con una lista de adyacencia?</b></summary> 
-Depende del grado de cada vértice: \[ \sum_{i \in V} O(d(i)) = O(m) \] donde `m` es la cantidad de aristas. Por lo tanto, la complejidad total es O(n + m). 
+La complejidad total es O(n + m), donde n es la cantidad de vértices y m el número de aristas.
 </details>
 
 <details> <summary><b>¿Qué establece el Handshaking Lemma?</b></summary> 
-Establece que la suma de los grados de todos los vértices es el doble de la cantidad de aristas: \[ \sum_{i \in V} d(i) = 2m \] 
+Establece que la suma de los grados de todos los vértices es el doble de la cantidad de aristas: 
+∑i∈V​ d(i)=2m
 </details>
 
 ---
@@ -57,7 +58,7 @@ Debe existir al menos un camino entre cada par de vértices del grafo.
 </details>
 
 <details> <summary><b>¿Cómo se puede determinar si un grafo es conexo?</b></summary> 
-Se elige un vértice inicial `s` y se realiza un recorrido (BFS o DFS). Si al finalizar todos los vértices están marcados como visitados, el grafo es conexo. 
+Se elige un vértice inicial s y se realiza un recorrido (BFS o DFS). Si al finalizar todos los vértices están marcados como visitados, el grafo es conexo. 
 </details>
 
 <details> <summary><b>¿Qué diferencia hay entre “grafo conexo” y “componente conexa”?</b></summary> 
@@ -74,23 +75,23 @@ Un triángulo es un conjunto de tres vértices distintos que son vecinos dos a d
 </details>
 
 <details> <summary><b>¿Cómo se puede determinar la cantidad de triángulos que contiene un grafo?</b></summary> 
-Para cada trío de vértices distintos `(i, j, k)`, verificar si todas las aristas `(ij)`, `(ik)` y `(jk)` existen. Cada triángulo se cuenta una vez. 
+Para cada trío de vértices distintos (i, j, k), verificar si todas las aristas (ij), (ik) y (jk) existen. Cada triángulo se cuenta una vez. 
 </details>
 
 <details> <summary><b>¿Cuál es la complejidad de un algoritmo que cuenta triángulos en un grafo?</b></summary> 
-Depende de la representación: - Con matriz de adyacencia → `O(n³)` - Con lista de adyacencia puede optimizarse a `O(m√m)` o mejor, dependiendo del enfoque. La complejidad general depende de cómo se consultan los vecinos. 
+Depende de la representación: - Con matriz de adyacencia → O(n³) - Con lista de adyacencia puede optimizarse a O(m√m) o mejor, dependiendo del enfoque. La complejidad general depende de cómo se consultan los vecinos. 
 </details>
 
 <details> <summary><b>¿Qué significa que dos vértices estén a distancia 2 en un grafo?</b></summary> 
-Dos vértices `i` y `j` están a distancia 2 si existe un vértice `k` tal que `(i, k)` y `(k, j)` son aristas del grafo. 
+Dos vértices i y j están a distancia 2 si existe un vértice k tal que (i, k) y (k, j) son aristas del grafo. 
 </details>
 
 <details> <summary><b>¿Cómo determinar si dos vértices están a distancia 2?</b></summary> 
-Verificar si existe al menos un vértice `k` que sea vecino tanto de `i` como de `j`. Esto puede hacerse recorriendo los vecinos de `i` y comprobando si alguno está conectado con `j`. 
+Verificar si existe al menos un vértice k que sea vecino tanto de i como de j. Esto puede hacerse recorriendo los vecinos de i y comprobando si alguno está conectado con j. 
 </details>
 
 <details> <summary><b>¿Cuál es la complejidad de verificar si dos vértices están a distancia 2?</b></summary> 
-Con una lista de adyacencia, el costo depende de los grados de `i` y `j`: `O(d(i) + d(j))`. Con una matriz de adyacencia, el costo es `O(n)`. 
+Con una lista de adyacencia, el costo depende de los grados de i y j: O(d(i) + d(j)). Con una matriz de adyacencia, el costo es O(n). 
 </details>
 
 <details> <summary><b>¿Qué es un vértice universal?</b></summary> 
@@ -98,25 +99,25 @@ Es un vértice que es vecino de todos los demás vértices del grafo.
 </details>
 
 <details> <summary><b>¿Cómo determinar si un vértice es universal?</b></summary> 
-Comprobar si su grado es igual a `n - 1`, donde `n` es la cantidad total de vértices del grafo. 
+Comprobar si su grado es igual a n - 1, donde n es la cantidad total de vértices del grafo. 
 </details>
 <details> <summary><b>¿Cuál es la complejidad de determinar si un vértice es universal?</b></summary> 
-- Con una matriz de adyacencia: `O(n)` - Con una lista de adyacencia: `O(d(i))` 
+- Con una matriz de adyacencia: O(n) - Con una lista de adyacencia: O(d(i)) 
 </details>
 
 <details> <summary><b>¿Se puede determinar en O(1) si un vértice es universal?</b></summary> 
-Sí. Si se mantiene actualizado el grado de cada vértice como atributo dentro del grafo, puede verificarse en tiempo constante si su grado es `n - 1`. 
+Sí. Si se mantiene actualizado el grado de cada vértice como atributo dentro del grafo, puede verificarse en tiempo constante si su grado es n - 1. 
 </details>
 
 ---
 
 ## ⚖️ Comparaciones y Aplicaciones
 <details> <summary><b>¿Qué estructura conviene usar para grafos densos?</b></summary> 
-La matriz de adyacencia, ya que las operaciones sobre aristas tienen costo constante `O(1)` y el número de aristas es alto (`m ≈ n²`). 
+La matriz de adyacencia, ya que las operaciones sobre aristas tienen costo constante O(1) y el número de aristas es alto (m ≈ n²). 
 </details>
 
 <details> <summary><b>¿Qué estructura conviene usar para grafos poco densos?</b></summary> 
-La lista de adyacencia, porque el número de aristas `m` es mucho menor que `n²`, y recorrer vecinos es más eficiente. 
+La lista de adyacencia, porque el número de aristas m es mucho menor que n², y recorrer vecinos es más eficiente. 
 </details>
 
 <details> <summary><b>¿Qué complejidad tienen BFS y DFS si el grafo se representa con listas de adyacencia?</b></summary> 
