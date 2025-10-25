@@ -38,7 +38,8 @@
 
 ## 🧠 Estructura de un Test Unitario
 
-<details> <summary><b>¿Cuál es la estructura básica de un test?</b></summary>
+<details> 
+<summary><b>¿Cuál es la estructura básica de un test?</b></summary>
 * Setup: preparar los datos necesarios.
 * Exercise: ejecutar la funcionalidad que se quiere probar.
 * Verify: comprobar que el resultado sea el esperado.
@@ -46,27 +47,32 @@
 </details>
 
 <details> <summary><b>Ejemplo de test unitario básico en JUnit</b></summary>
-```java
+
 @Test
 public void cumplirAniosTest() {
     Persona p = new Persona("Pepe", 17); // Setup
     p.cumplirAnios();                    // Exercise
     assertEquals(18, p.getEdad());       // Verify
 }
-```
 Este test verifica que el método cumplirAnios() incremente correctamente la edad de una persona.
 </details>
 
-<details> <summary><b>¿Cómo se ejecutan los tests unitarios en Eclipse?</b></summary> Seleccionando la clase de prueba y eligiendo **Run As → JUnit Test**. JUnit ejecuta todos los métodos con la anotación <code>@Test</code>. </details>
-🔍 Assertions (Aserciones)
-<details> <summary><b>¿Qué son las assertions?</b></summary> Son métodos que verifican condiciones durante el test. Si la condición no se cumple, el test **falla automáticamente**. </details>
+<details> <summary><b>¿Cómo se ejecutan los tests unitarios en Eclipse?</b></summary> 
+    Seleccionando la clase de prueba y eligiendo Run As → JUnit Test. JUnit ejecuta todos los métodos con la anotación <code>@Test</code>. 
+</details>
+
+## 🔍 Assertions (Aserciones)
+<details> <summary><b>¿Qué son las assertions?</b></summary> 
+    Son métodos que verifican condiciones durante el test. Si la condición no se cumple, el test **falla automáticamente**. 
+</details>
+
 <details> <summary><b>¿Cuáles son las principales assertions de JUnit?</b></summary>
-Método	Descripción
-assertEquals(expected, actual)	Verifica igualdad entre valores.
-assertArrayEquals(expected, actual)	Compara arreglos.
-assertTrue(cond) / assertFalse(cond)	Evalúa condiciones booleanas.
-assertNull(obj) / assertNotNull(obj)	Verifica nulidad.
-fail(msg)	Fuerza un fallo explícito.
+|Método	|Descripción|
+|assertEquals(expected, actual)	|Verifica igualdad entre valores|
+|assertArrayEquals(expected, actual)|	Compara arreglos.|
+|assertTrue(cond) / assertFalse(cond)|	Evalúa condiciones booleanas.|
+|assertNull(obj) / assertNotNull(obj)|	Verifica nulidad.|
+|fail(msg)	|Fuerza un fallo explícito.|
 </details>
 🏷️ Anotaciones Importantes
 <details> <summary><b>¿Para qué sirve <code>@Test</code>?</b></summary> Indica que el método es un caso de prueba. </details>
