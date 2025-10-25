@@ -48,7 +48,7 @@ d(i)=0
 </details>
 
 
-##🧮 Representaciones de Grafos
+## 🧮 Representaciones de Grafos
 <details> <summary><b>¿Qué es la matriz de adyacencia de un grafo?</b></summary>
 Es una matriz cuadrada 
 A=(aij) donde:
@@ -97,7 +97,7 @@ Eliminar un vértice cuesta O(n) en el peor caso.
 (Si se usan TreeSet, las operaciones sobre aristas pueden costar O(log n)).
 </details>
 
-🔁 Grafos Dirigidos
+## 🔁 Grafos Dirigidos
 <details> <summary><b>¿Qué es un grafo dirigido (o digrafo)?</b></summary>
 Un grafo dirigido es un par D=(N,A) donde:
 * N es el conjunto de nodos.
