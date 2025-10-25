@@ -40,16 +40,16 @@
 
 <details> 
 <summary><b>¿Cuál es la estructura básica de un test?</b></summary>
-<ol>
+<ul>
     <li>Setup: preparar los datos necesarios.</li>
     <li>Exercise: ejecutar la funcionalidad que se quiere probar.</li>
     <li>Verify: comprobar que el resultado sea el esperado.</li>
     <li>Teardown (opcional): limpiar o restaurar el entorno.</li>
-</ol>
+</ul>
 </details>
 
 <details> <summary><b>Ejemplo de test unitario básico en JUnit</b></summary>
-
+```java
 @Test
 public void cumplirAniosTest() {
     Persona p = new Persona("Pepe", 17); // Setup
@@ -57,7 +57,7 @@ public void cumplirAniosTest() {
     assertEquals(18, p.getEdad());       // Verify
 }
 Este test verifica que el método cumplirAnios() incremente correctamente la edad de una persona.
-</details>
+</details>```
 
 <details> <summary><b>¿Cómo se ejecutan los tests unitarios en Eclipse?</b></summary> 
     Seleccionando la clase de prueba y eligiendo Run As → JUnit Test. JUnit ejecuta todos los métodos con la anotación <code>@Test</code>. 
@@ -199,4 +199,5 @@ Crear un test antes de corregir un bug.
 </details>
 <details> <summary><b>¿Por qué escribir un test antes de corregir un bug?</b></summary> Para garantizar que el bug se reproduce, que se corrige efectivamente y que **no vuelva a aparecer** en el futuro. </details>
 <details> <summary><b>¿Qué recomendación hace Alex Iskold sobre testing?</b></summary> > “Al principio parece trabajo extra, pero una vez que empezás a escribir tests, te preguntás cómo programabas sin ellos.” También recomienda practicarlo en **parejas (pair testing)** para hacerlo más productivo y divertido. </details>
+
 
