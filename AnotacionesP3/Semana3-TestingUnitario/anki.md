@@ -68,11 +68,13 @@ Este test verifica que el método cumplirAnios() incremente correctamente la eda
 
 <details> <summary><b>¿Cuáles son las principales assertions de JUnit?</b></summary>
 |Método	|Descripción|
+| :--- | :--- |
 |assertEquals(expected, actual)	|Verifica igualdad entre valores|
 |assertArrayEquals(expected, actual)|	Compara arreglos.|
 |assertTrue(cond) / assertFalse(cond)|	Evalúa condiciones booleanas.|
 |assertNull(obj) / assertNotNull(obj)|	Verifica nulidad.|
 |fail(msg)	|Fuerza un fallo explícito.|
+>
 </details>
 🏷️ Anotaciones Importantes
 <details> <summary><b>¿Para qué sirve <code>@Test</code>?</b></summary> Indica que el método es un caso de prueba. </details>
