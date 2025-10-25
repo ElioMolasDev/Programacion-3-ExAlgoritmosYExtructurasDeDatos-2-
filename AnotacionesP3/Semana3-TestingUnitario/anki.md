@@ -40,10 +40,12 @@
 
 <details> 
 <summary><b>¿Cuál es la estructura básica de un test?</b></summary>
-* Setup: preparar los datos necesarios.
-* Exercise: ejecutar la funcionalidad que se quiere probar.
-* Verify: comprobar que el resultado sea el esperado.
-* Teardown (opcional): limpiar o restaurar el entorno.
+<ol>
+    <li>Setup: preparar los datos necesarios.</li>
+    <li>Exercise: ejecutar la funcionalidad que se quiere probar.</li>
+    <li>Verify: comprobar que el resultado sea el esperado.</li>
+    <li>Teardown (opcional): limpiar o restaurar el entorno.</li>
+</ol>
 </details>
 
 <details> <summary><b>Ejemplo de test unitario básico en JUnit</b></summary>
@@ -197,3 +199,4 @@ Crear un test antes de corregir un bug.
 </details>
 <details> <summary><b>¿Por qué escribir un test antes de corregir un bug?</b></summary> Para garantizar que el bug se reproduce, que se corrige efectivamente y que **no vuelva a aparecer** en el futuro. </details>
 <details> <summary><b>¿Qué recomendación hace Alex Iskold sobre testing?</b></summary> > “Al principio parece trabajo extra, pero una vez que empezás a escribir tests, te preguntás cómo programabas sin ellos.” También recomienda practicarlo en **parejas (pair testing)** para hacerlo más productivo y divertido. </details>
+
