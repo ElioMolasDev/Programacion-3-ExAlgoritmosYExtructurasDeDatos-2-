@@ -3,12 +3,12 @@
 ## 🗺️ Recorrido de Grafos (General)
 <details>
 <summary><b>¿Cuál es el problema principal que busca resolver un algoritmo de recorrido de grafos?</b></summary>
-  [cite_start]Determinar si un grafo es conexo, o, más generalmente, obtener todos los vértices que son alcanzables a partir de un vértice inicial $s \in V$ arbitrario. [cite: 195, 201, 270]
+Determinar si un grafo es conexo, o, más generalmente, obtener todos los vértices que son alcanzables a partir de un vértice inicial $s \in V$ arbitrario. 
 </details>
 
 <details>
 <summary><b>¿Cuál es la idea básica del algoritmo de recorrido?</b></summary>
-  [cite_start]Partir de un vértice inicial $s \in V$ y, de forma iterativa, obtener todos los vértices a los que se puede llegar a partir de $s$. [cite: 201, 270]
+Partir de un vértice inicial $s \in V$ y, de forma iterativa, obtener todos los vértices a los que se puede llegar a partir de $s$. 
 </details>
 
 <details>
@@ -78,3 +78,4 @@
 <summary><b>¿Cuál es la complejidad computacional para determinar si un vértice es universal?</b></summary>
   [cite_start]La complejidad de un método directo para verificar si un vértice es vecino de todos los demás dependerá de la representación, pero la pregunta plantea si puede implementarse en $\mathbf{O(1)}$ modificando la representación interna del grafo. [cite: 380, 381]
 </details>
+
