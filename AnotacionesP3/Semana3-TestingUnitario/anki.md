@@ -82,126 +82,136 @@ Este test verifica que el método cumplirAnios() incremente correctamente la eda
 </details>
 
 ## 🏷️ Anotaciones Importantes
-<details> <summary><b>¿Para qué sirve <code>@Test</code>?</b></summary> Indica que el método es un caso de prueba. </details>
-<details> <summary><b>¿Qué hace <code>@Before</code>?</b></summary> Ejecuta un método **antes de cada test**, normalmente para inicializar datos o preparar el entorno. </details>
-<details> <summary><b>¿Qué hace <code>@After</code>?</b></summary> Ejecuta un método **después de cada test**, generalmente para liberar recursos o limpiar el entorno. </details>
-<details> <summary><b>¿Qué hace <code>@Ignore</code>?</b></summary> Permite **omitir temporalmente** la ejecución de un test. </details>
-<details> <summary><b>¿Cómo se prueban excepciones con JUnit?</b></summary>
 
+<details> <summary><b>¿Para qué sirve <code>@Test</code>?</b></summary> 
+  Indica que el método es un caso de prueba. 
+</details>
+
+<details> <summary><b>¿Qué hace <code>@Before</code>?</b></summary> 
+  Ejecuta un método antes de cada test, normalmente para inicializar datos o preparar el entorno. 
+</details>
+
+<details> <summary><b>¿Qué hace <code>@After</code>?</b></summary> 
+  Ejecuta un método después de cada test, generalmente para liberar recursos o limpiar el entorno. 
+</details>
+
+<details> <summary><b>¿Qué hace <code>@Ignore</code>?</b></summary> 
+  Permite omitir temporalmente la ejecución de un test. 
+</details>
+
+<details> <summary><b>¿Cómo se prueban excepciones con JUnit?</b></summary>
 Se usa la anotación <code>@Test(expected = TipoDeExcepcion.class)</code>.
 Ejemplo:
-
-@Test(expected = NullPointerException.class)
+<code> @Test(expected = NullPointerException.class)
 public void nullTest() {
     Arreglos.sumarPositivos(null);
-}
-
+}</code>
 </details>
-<details> <summary><b>¿Qué hace <code>@Test(timeout = 100)</code>?</b></summary> Hace que el test falle si tarda más de **100 milisegundos** en ejecutarse. </details>
-✅ Ventajas del Testing Unitario
+
+<details> <summary><b>¿Qué hace <code>@Test(timeout = 100)</code>?</b></summary> 
+  Hace que el test falle si tarda más de <b>100 milisegundos</b>b> en ejecutarse. 
+</details>
+
+## ✅ Ventajas del Testing Unitario
+
 <details> <summary><b>¿Cuáles son las ventajas principales?</b></summary>
-
-Detecta errores de forma temprana.
-
-Mejora el diseño y la estructura del código.
-
-Da confianza para refactorizar.
-
-Sirve como documentación viva.
-
-Reduce el tiempo de depuración.
-
+<ul>
+  <li> Detecta errores de forma temprana.</li>
+  <li>Mejora el diseño y la estructura del código.</li>
+  <li>Da confianza para refactorizar.</li>
+  <li>Sirve como documentación viva.</li>
+  <li>Reduce el tiempo de depuración.</li>
+</ul>
 </details>
-<details> <summary><b>¿Qué dijo Robert Martin sobre los tests?</b></summary> > “Los tests son documentos vivos, claros y sincronizados con el código, porque se ejecutan y no pueden desactualizarse.” Además, los tests bien diseñados **reducen el acoplamiento** y permiten refactorizar sin miedo. </details>
-⚠️ Limitaciones del Testing Unitario
+
+<details> <summary><b>¿Qué dijo Robert Martin sobre los tests?</b></summary> 
+  > “Los tests son documentos vivos, claros y sincronizados con el código, porque se ejecutan y no pueden desactualizarse.” Además, los tests bien diseñados <b>reducen el acoplamiento</b> y permiten refactorizar sin miedo. 
+</details>
+
+## ⚠️ Limitaciones del Testing Unitario
+
 <details> <summary><b>¿Qué limitaciones tiene?</b></summary>
-
-No garantiza que el sistema esté libre de errores.
-
-Requiere mantenimiento constante.
-
-No cubre los errores de integración entre módulos.
-
-Puede ser difícil diseñar tests totalmente independientes.
-
+<ul>
+  <li>No garantiza que el sistema esté libre de errores.</li>
+  <li>Requiere mantenimiento constante.</li>
+  <li>No cubre los errores de integración entre módulos.</li>
+  <li>Puede ser difícil diseñar tests totalmente independientes.</li>
+</ul>
 </details>
-🧮 Ejemplos de Tests de Borde
-<details> <summary><b>¿Qué son los casos de borde?</b></summary> Son escenarios extremos o límites que prueban el comportamiento del sistema frente a valores mínimos, máximos o situaciones no comunes. Ejemplo: listas vacías, valores nulos o negativos. </details>
+
+## 🧮 Ejemplos de Tests de Borde
+<details> <summary><b>¿Qué son los casos de borde?</b></summary> 
+  Son escenarios extremos o límites que prueban el comportamiento del sistema frente a valores mínimos, máximos o situaciones no comunes. Ejemplo: listas vacías, valores nulos o negativos. 
+</details>
+
 <details> <summary><b>Ejemplo de test de borde para una clase Materia</b></summary>
-@Test
+<code>@Test
 public void sinInscriptosTest() {
     Materia m = new Materia("Programacion III");
     assertEquals(0, m.cantidadAprobados());
-}
-
-
+}</code>
 Comprueba que una materia sin inscriptos tenga 0 aprobados.
-
 </details>
+
 <details> <summary><b>Ejemplo de test de inscripción válida</b></summary>
-@Test
+<code>@Test
 public void postInscripcionTest() {
     Materia m = new Materia("Programacion III");
     Alumno a = new Alumno("Jose Perez", "32514521/2011");
     m.inscribir(a);
     assertTrue(m.estaInscripto(a));
 }
-
-
+</code>
 Verifica el caso correcto de inscripción de un alumno.
-
 </details>
-🧱 TDD – Test Driven Development
-<details> <summary><b>¿Qué es el Test Driven Development (TDD)?</b></summary> Es una metodología donde primero se escribe un **test que falla**, luego el **código mínimo para pasarlo**, y finalmente se **refactoriza** el código. </details>
+
+## 🧱 TDD – Test Driven Development
+<details> <summary><b>¿Qué es el Test Driven Development (TDD)?</b></summary> 
+  Es una metodología donde primero se escribe un <b>test que falla</b>, luego el <b>código mínimo para pasarlo</b>, y finalmente se refactoriza el código. 
+</details>
+
 <details> <summary><b>¿Cuáles son las tres leyes del TDD?</b></summary>
-
-No escribir código de producción sin un test que falle.
-
-No escribir más de un test que falle a la vez.
-
-No escribir más código del necesario para pasar el test.
-
+<ul>
+<li>No escribir código de producción sin un test que falle.</li>
+<li>No escribir más de un test que falle a la vez.</li>
+<li>No escribir más código del necesario para pasar el test.</li>
+</ul>
 </details>
+
 <details> <summary><b>¿Qué ventajas tiene el TDD?</b></summary>
-
-Mejora el diseño del código.
-
-Reduce errores.
-
-Obliga a pensar en la interfaz antes de implementarla.
-
-Garantiza cobertura de pruebas desde el inicio.
-
+<ul>
+  <li>Mejora el diseño del código.</li>
+  <li>Reduce errores.</li>
+  <li>Obliga a pensar en la interfaz antes de implementarla.</li>
+  <li>Garantiza cobertura de pruebas desde el inicio.</li>
+</ul>
 </details>
+
 <details> <summary><b>¿Qué desventajas puede tener el TDD?</b></summary>
-
-Puede requerir más tiempo inicial.
-
-No siempre es fácil escribir buenos tests antes del código.
-
-Puede ser menos útil en proyectos con requisitos poco definidos.
-
+<ul>
+  <li>Puede requerir más tiempo inicial.</li>
+  <li>No siempre es fácil escribir buenos tests antes del código.</li>
+  <li>Puede ser menos útil en proyectos con requisitos poco definidos.</li>
+</ul>
 </details>
-💡 Buenas Prácticas
+
+## 💡 Buenas Prácticas
 <details> <summary><b>¿Qué buenas prácticas se recomiendan al escribir tests unitarios?</b></summary>
-
-Escribir un test por cada funcionalidad importante.
-
-No testear getters ni setters triviales.
-
-Asegurar independencia entre tests.
-
-Usar mocks para evitar efectos reales sobre los datos.
-
-Actualizar los tests con cada cambio de funcionalidad.
-
-Ejecutar los tests con frecuencia.
-
-Crear un test antes de corregir un bug.
-
+<ul>
+  <li>Escribir un test por cada funcionalidad importante.</li>
+  <li>No testear getters ni setters triviales.</li>
+  <li>Asegurar independencia entre tests.</li>
+  <li>Usar mocks para evitar efectos reales sobre los datos. </li>
+  <li>Actualizar los tests con cada cambio de funcionalidad. </li>
+  <li>Ejecutar los tests con frecuencia. </li>
+  <li>Crear un test antes de corregir un bug.</li>
+</ul>
 </details>
-<details> <summary><b>¿Por qué escribir un test antes de corregir un bug?</b></summary> Para garantizar que el bug se reproduce, que se corrige efectivamente y que **no vuelva a aparecer** en el futuro. </details>
-<details> <summary><b>¿Qué recomendación hace Alex Iskold sobre testing?</b></summary> > “Al principio parece trabajo extra, pero una vez que empezás a escribir tests, te preguntás cómo programabas sin ellos.” También recomienda practicarlo en **parejas (pair testing)** para hacerlo más productivo y divertido. </details>
+
+<details> <summary><b>¿Por qué escribir un test antes de corregir un bug?</b></summary> 
+  Para garantizar que el bug se reproduce, que se corrige efectivamente y que no vuelva a aparecer en el futuro. 
+</details>
+
 
 
 
