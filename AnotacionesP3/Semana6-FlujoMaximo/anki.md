@@ -26,7 +26,7 @@ Se calcula como la cantidad total de flujo que sale del nodo origen (s).
 
 <details>
 <summary>Defina el concepto de un "corte" en una red de flujo</summary>
-Es una partición de los nodos en dos conjuntos, S y \overline{S}, donde el nodo origen s está en S y el nodo destino t está en \overline{S}.
+Un corte en la red G = (N, A) es un subconjunto S ⊆ N \ {t} talque s ∈ S.
 </details>
 
 <details>
