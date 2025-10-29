@@ -1,3 +1,5 @@
+## 🧩 Conceptos básicos
+
 <details>
 <summary>¿Cuál es el propósito del Problema del Flujo Máximo?</summary>
 Encontrar el valor máximo de flujo que se puede transportar desde un nodo origen (s) hasta un nodo destino (t) en una red dirigida.
@@ -16,7 +18,7 @@ Un grafo dirigido G=(N,A), los nodos especiales s (origen) y t (destino), y una 
 
 <details>
 <summary>¿Qué es la "restricción de capacidad" y cómo se representa matemáticamente?</summary>
-Es la condición de que la cantidad de flujo f(e) enviada por un arco e debe ser menor o igual a su capacidad c(e), es decir, f(e)\le c(e).
+Es la condición de que la cantidad de flujo f(e) enviada por un arco e debe ser menor o igual a su capacidad c(e), es decir, f(e)<= c(e).
 </details>
 
 <details>
@@ -24,15 +26,35 @@ Es la condición de que la cantidad de flujo f(e) enviada por un arco e debe ser
 Se calcula como la cantidad total de flujo que sale del nodo origen (s).
 </details>
 
+## ✂️ Cortes en la red
+
 <details>
 <summary>Defina el concepto de un "corte" en una red de flujo</summary>
-Un corte en la red G = (N, A) es un subconjunto S ⊆ N \ {t} talque s ∈ S.
+Un corte en la red G = (N, A) es un subconjunto S ⊆ N \ {t} : s ∈ S. S es un subconjunto incluido en N - el nodo t (nodo de destino) talque s (nodo de origen) pertenece al subconjunto S
 </details>
 
 <details>
-<summary>¿Qué establece el Teorema de Flujo Máximo - Corte Mínimo?</summary>
-Establece que el valor del flujo máximo es igual a la capacidad del corte mínimo en la red.
+<summary>¿Qué relación existe entre el flujo y la capacidad de un corte?</summary>
+Para todo flujo F y todo corte S, se cumple F≤c(S).
 </details>
+
+<details>
+<summary>¿¿Qué ocurre si F=c(S)??</summary>
+Entonces f es un flujo máximo y S un corte mínimo (certificado de optimalidad).
+</details>
+
+## 🔄 Red residual y caminos de aumento
+<details>
+<summary>¿¿Qué es la red residual R(N,f)??</summary>
+Dada una red G = (N, A) con función de capacidad c y un flujo factible f , definimos la red residual R(N, f ) = (N, AR ), donde:
+<il>
+  <li>vw ∈ AR si f (vw ) <. c(vw ),</li>
+  <li>wv ∈ AR si f (vw ) > 0. </li>
+<il>
+</details>
+
+## ⚙️ Algoritmo de Ford y Fulkerson
+
 
 <details>
 <summary>¿Qué es un "camino de aumento" en el contexto del Algoritmo de Ford y Fulkerson?</summary>
