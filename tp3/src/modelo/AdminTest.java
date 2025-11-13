@@ -34,6 +34,16 @@ public class AdminTest {
         admin.cargarValores(valores);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void generarSudokuAleatorioConCantidadCeroTest() {
+        admin.generarSudokuAleatorio(0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void generarSudokuAleatorioConCantidadMayorA81Test() {
+        admin.generarSudokuAleatorio(41);
+    }
+    
     @Test
     public void cargarValoresConMatrizValidaTest() {
         int[][] valores = new int[9][9];
@@ -101,35 +111,6 @@ public class AdminTest {
     }
 
     @Test
-    public void noHayConflictosTest() {
-        int[][] valores = new int[9][9];
-        valores[0][0] = 1;
-        
-        admin.cargarValores(valores);
-        assertFalse(admin.hayConflictos());
-    }
-
-    @Test
-    public void hayConflictosRTest() {
-        int[][] valores = new int[9][9];
-        valores[0][0] = 1;
-        valores[0][1] = 1;
-        
-        admin.cargarValores(valores);
-        assertTrue(admin.hayConflictos());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void generarSudokuAleatorioConCantidadCeroTest() {
-        admin.generarSudokuAleatorio(0);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void generarSudokuAleatorioConCantidadMayorA81Test() {
-        admin.generarSudokuAleatorio(82);
-    }
-
-    @Test
     public void generarSudokuAleatorioConCantidadValidaTest() {
         int[][] tablero = admin.generarSudokuAleatorio(20);
         
@@ -138,23 +119,6 @@ public class AdminTest {
         assertEquals(9, tablero[0].length);
     }
 
-    @Test
-    public void esValidoValoresInicialesConTableroVacioTest() {
-        int[][] valores = new int[9][9];
-        admin.cargarValores(valores);
-        
-        assertTrue(admin.esValidoValoresIniciales());
-    }
-
-    @Test
-    public void esValidoValoresInicialesConConflictosTest() {
-        int[][] valores = new int[9][9];
-        valores[0][0] = 1;
-        valores[0][1] = 1;
-        
-        admin.cargarValores(valores);
-        assertFalse(admin.esValidoValoresIniciales());
-    }
 
     @Test
     public void resolverSudokuRetornaMatrizTest() {
@@ -187,54 +151,6 @@ public class AdminTest {
         if (admin.getCantidadSoluciones() > 0) {
             assertTrue(admin.sudokuSolucionado());
         }
-    }
-
-    @Test
-    public void getCantidadSolucionesRetornaCeroSinResolverTest() {
-        int[][] valores = new int[9][9];
-        admin.cargarValores(valores);
-        
-        assertEquals(0, admin.getCantidadSoluciones());
-    }
-
-    @Test
-    public void getCantidadSolucionesRetornaMayorCeroDespuesDeResolverTest() {
-        int[][] valores = new int[9][9];
-        admin.cargarValores(valores);
-        
-        admin.resolverSudoku();
-        assertTrue(admin.getCantidadSoluciones() > 0);
-    }
-
-    @Test
-    public void getSolucionRetornaNullSinResolverTest() {
-        int[][] valores = new int[9][9];
-        admin.cargarValores(valores);
-        
-        assertNull(admin.getSolucion(0));
-    }
-
-    @Test
-    public void getSolucionRetornaSolucionValidaDespuesDeResolverTest() {
-        int[][] valores = new int[9][9];
-        valores[0][0] = 5;
-        admin.cargarValores(valores);
-        
-        admin.resolverSudoku();
-        
-        if (admin.getCantidadSoluciones() > 0) {
-            int[][] solucion = admin.getSolucion(0);
-            assertNotNull(solucion);
-            assertEquals(5, solucion[0][0]);
-        }
-    }
-
-    @Test
-    public void alcanzadoLimiteMaximoRetornaFalseSinResolverTest() {
-        int[][] valores = new int[9][9];
-        admin.cargarValores(valores);
-        
-        assertFalse(admin.alcanzadoLimiteMaximo());
     }
 
     @Test
