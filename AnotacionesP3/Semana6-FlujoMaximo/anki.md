@@ -7,8 +7,10 @@ dado grafo dirigido G=(N,A), los nodos especiales s (origen) y t (destino), y un
 
 <details>
 <summary>¿Cuáles son las dos condiciones que un envío de cantidades debe cumplir para ser un "flujo" válido?</summary>
-1. Restricción de Capacidad: El flujo por un arco no debe superar su capacidad.
-2. Conservación del Flujo: En todos los nodos intermedios, el flujo que entra debe ser igual al flujo que sale.
+  <ul>
+    <li>Restricción de Capacidad: El flujo por un arco no debe superar su capacidad.</li>
+    <li>Conservación del Flujo: En todos los nodos intermedios, el flujo que entra debe ser igual al flujo que sale.</li>
+  </ul>
 </details>
 
 <details>
