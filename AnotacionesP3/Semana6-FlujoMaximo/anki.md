@@ -32,7 +32,11 @@ Un corte en la red G = (N, A) es un subconjunto S ⊆ N \ {t} : s ∈ S. S es un
 
 <details>
 <summary>¿Qué relación existe entre el flujo y la capacidad de un corte?</summary>
-Para todo flujo F y todo corte S, se cumple F≤c(S).
+<ul>
+  <li>Sea F un flujo definido en la red G = (N, A) y S un corte -> F = (Sumarotia flujos de los arcos f(e) de salida) - (Sumarotia flujos de los arcos f(e) de entrada)</li>
+  <li>Para todo flujo F y todo corte S, se cumple F≤c(S).</li>
+</ul>
+  
 </details>
 
 <details>
@@ -50,6 +54,10 @@ Dada una red G = (N, A) con función de capacidad c y un flujo factible f , defi
 <il>
 </details>
 
+<summary>¿¿Qué es un camino de aumento??</summary>
+Un camino de aumento P es un camino orientado de s a t en la red Recidual R(N, f)
+</details>
+
 ## ⚙️ Algoritmo de Ford y Fulkerson
 
 
@@ -60,10 +68,33 @@ Es un camino orientado desde el origen (s) hasta el destino (t) en la Red Residu
 
 <details>
 <summary>¿Cuál es el criterio de parada del Algoritmo de Ford y Fulkerson?</summary>
-El flujo es máximo cuando no se puede encontrar ningún camino de aumento en la Red Residual.
+f es un flujo es máximo cuando no se puede encontrar ningún camino de aumento P en la Red Residual.
 </details>
 
 <details>
-<summary>¿Qué significa que F = c(S) para un flujo f y un corte S?</summary>
-Significa que f es un flujo máximo y S es un corte de capacidad mínima.
+<summary>¿Que teoremas salen del algoritmo Ford y Fulkenson?</summary>
+<ul>
+  <li>Si las capacidades de los arcos de la red son enteras,
+entonces el problema de flujo máximo tiene un flujo máximo
+entero.</li>
+  <li> </li>
+</ul>
+    
+• Teorema: Si los valores del flujo inicial y las capacidades de los
+arcos de la red son enteras, entonces el método de Ford y
+Fulkerson realiza a lo sumo nU iteraciones, donde U es una cota
+superior finita para el valor de las capacidades.
 </details>
+
+<details>
+<summary>¿Cual es la complejidad del algoritmo Ford y Fulkenson?</summary>
+El algoritmo de Ford y Fulkerson obtiene un flujo máximo con complejidad O(nmU), donde U = max [e ∈ E c(e)]. esto es pseudo-Polinomial y esto no es satisfactorio
+</details>
+
+## ⚙️ Algoritmo de Edmon y Karps
+
+<details>
+<summary>¿que hace el algoritmo de Edmon y Karps?</summary>
+este algoritmo consiste en usar BFS para buscar caminos de aumento y su complejidad es O(nm²).
+</details>
+ 
