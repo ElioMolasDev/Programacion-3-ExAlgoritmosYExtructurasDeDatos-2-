@@ -1,13 +1,8 @@
 ## 🧩 Conceptos básicos
 
 <details>
-<summary>¿Cuál es el propósito del Problema del Flujo Máximo?</summary>
-Encontrar el valor máximo de flujo que se puede transportar desde un nodo origen (s) hasta un nodo destino (t) en una red dirigida.
-</details>
-
-<details>
-<summary>¿Qué elementos componen la entrada de una red de flujo?</summary>
-Un grafo dirigido G=(N,A), los nodos especiales s (origen) y t (destino), y una función de capacidad c para los arcos.
+<summary>¿Que es el problema de flujo maximo?</summary>
+dado grafo dirigido G=(N,A), los nodos especiales s (origen) y t (destino), y una función de capacidad c para los arcos se debe encontrar el valor máximo de flujo que se puede transportar desde un nodo origen (s) hasta un nodo destino (t) en la red.
 </details>
 
 <details>
