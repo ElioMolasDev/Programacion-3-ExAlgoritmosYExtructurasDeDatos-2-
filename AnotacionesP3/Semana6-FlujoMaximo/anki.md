@@ -73,13 +73,9 @@ f es un flujo es máximo cuando no se puede encontrar ningún camino de aumento 
 
 <details>
 <summary>¿Que teoremas salen del algoritmo Ford y Fulkenson?</summary>
-<ul>
-  <li>Si las capacidades de los arcos de la red son enteras,
+• Si las capacidades de los arcos de la red son enteras,
 entonces el problema de flujo máximo tiene un flujo máximo
-entero.</li>
-  <li> </li>
-</ul>
-    
+entero    
 • Teorema: Si los valores del flujo inicial y las capacidades de los
 arcos de la red son enteras, entonces el método de Ford y
 Fulkerson realiza a lo sumo nU iteraciones, donde U es una cota
