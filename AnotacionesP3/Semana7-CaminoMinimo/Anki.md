@@ -5,11 +5,8 @@
 <details>
 <summary><b>¿Qué es el problema del camino mínimo?</b></summary>
 <ul>
-<li>Datos de entrada:
-1. Un grafo dirigido G = (N, A).
-2. Nodos s, t ∈ N de origen y destino.
-3. Una función de distancia d : A → R+ asociada con los arcos.</li>
-<li>Es el problema de encontrar una secuencia de aristas entre dos vértices de un grafo ponderado tal que la suma de los pesos de dichas aristas sea mínima.</li>
+<li>Dados un grafo dirigido G = (N, A). lo nodos s, t ∈ N de origen y destino y una función de distancia d : A → R+.
+<li>Se busca encontrar una secuencia de aristas entre dos vértices de un grafo ponderado tal que la suma de los pesos de dichas aristas sea mínima.</li>
 </ul>
 </details>
 
@@ -21,14 +18,6 @@ Representa un costo, distancia o tiempo asociado al recorrido entre dos vértice
 </details>
 
 ---
-
-<details>
-<summary><b>¿Qué es un camino mínimo entre dos vértices?</b></summary>
-Es el camino con el menor peso total posible entre esos dos vértices dentro del grafo.
-</details>
-
----
-
 <details>
 <summary><b>¿Cuáles son los tipos de problemas de camino mínimo más comunes?</b></summary>
 <il>
@@ -37,6 +26,19 @@ Es el camino con el menor peso total posible entre esos dos vértices dentro del
 <li>Entre un origen y un destino específico.</li>
   </il>
   </details>
+---
+
+<details>
+<summary><b>¿Qué Ocurre si G contiene un ciclo con pesos negativos?</b></summary>
+si G tiene algún ciclo con peso negativo alcanzable desde s, el concepto de camino mı́nimo deja de estar bien definido.
+</details>
+---
+
+<details>
+<summary><b>¿Que es la propiedad de sub estructura Optima??</b></summary>
+Sea Pij un camino mı́nimo entre i y j, y sea k ∈ Pij . Entonces, el
+subcamino de Pij entre i y k es un camino mı́nimo entre i y k.
+</details>
 
 ---
 
@@ -55,14 +57,13 @@ Los principales son:
 
 <details>
 <summary><b>¿Cuál es la idea principal del algoritmo de Dijkstra?</b></summary>
-Asumimos que las longitudes de las aristas son positivas. El grafo puede ser orientado o no orientado.
-<il>
-  <li>Asignar distancias tentativas ds = 0 y di = ∞ para i 6= s.</li>  
-  <li>Mientras el destino no esté visitado:
-◦   Seleccionar como nodo actual i el nodo no visitado con menor distancia tentativa, y marcarlo como visitado.
-◦   Para cada j ∈ N + (i) no visitado, calcular dj0 = di + dij . Si dj0 < dj entonces fijar dj := dj0 .</li>  
-  <li>Retornar dt </li>
-</il>                                                      
+• Asumimos que las longitudes de las aristas son positivas. El grafo puede ser orientado o no orientado.
+• Asignar distancias tentativas ds = 0 y di = ∞ para i 6= s. 
+• Mientras el destino no esté visitado:
+• Seleccionar como nodo actual i el nodo no visitado con menor distancia tentativa, y marcarlo como visitado.
+• Para cada j ∈ N + (i) no visitado, calcular dj0 = di + dij . Si dj0 <  dj entonces fijar dj := dj0
+• Retornar dt 
+                                                     
 </details>
 
 ---
@@ -172,3 +173,4 @@ Porque existen algoritmos **eficientes y correctos** (Dijkstra, Bellman-Ford, Fl
 </details>
 
 ---
+
