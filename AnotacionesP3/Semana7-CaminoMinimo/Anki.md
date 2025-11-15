@@ -18,6 +18,7 @@ Representa un costo, distancia o tiempo asociado al recorrido entre dos vértice
 </details>
 
 ---
+
 <details>
 <summary><b>¿Cuáles son los tipos de problemas de camino mínimo más comunes?</b></summary>
 <il>
@@ -26,12 +27,14 @@ Representa un costo, distancia o tiempo asociado al recorrido entre dos vértice
 <li>Entre un origen y un destino específico.</li>
   </il>
   </details>
+  
 ---
 
 <details>
 <summary><b>¿Qué Ocurre si G contiene un ciclo con pesos negativos?</b></summary>
 si G tiene algún ciclo con peso negativo alcanzable desde s, el concepto de camino mı́nimo deja de estar bien definido.
 </details>
+
 ---
 
 <details>
@@ -58,11 +61,16 @@ Los principales son:
 <details>
 <summary><b>¿Cuál es la idea principal del algoritmo de Dijkstra?</b></summary>
 • Asumimos que las longitudes de las aristas son positivas. El grafo puede ser orientado o no orientado.
+  <br>
 • Asignar distancias tentativas ds = 0 y di = ∞ para i 6= s. 
+<br>
 • Mientras el destino no esté visitado:
-• Seleccionar como nodo actual i el nodo no visitado con menor distancia tentativa, y marcarlo como visitado.
-• Para cada j ∈ N + (i) no visitado, calcular dj0 = di + dij . Si dj0 <  dj entonces fijar dj := dj0
-• Retornar dt 
+<br>
+  • Seleccionar como nodo actual i el nodo no visitado con menor distancia tentativa, y marcarlo como visitado.
+<br>
+  • Para cada j ∈ N + (i) no visitado, calcular dj0 = di + dij . Si dj0 menor a dj entonces fijar dj := dj0
+<br>
+  • Retornar dt 
                                                      
 </details>
 
@@ -173,4 +181,5 @@ Porque existen algoritmos **eficientes y correctos** (Dijkstra, Bellman-Ford, Fl
 </details>
 
 ---
+
 
