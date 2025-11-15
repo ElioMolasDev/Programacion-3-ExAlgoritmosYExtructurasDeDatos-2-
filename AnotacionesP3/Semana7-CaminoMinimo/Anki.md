@@ -62,16 +62,15 @@ Los principales son:
 <summary><b>¿Cuál es la idea principal del algoritmo de Dijkstra?</b></summary>
 • Asumimos que las longitudes de las aristas son positivas. El grafo puede ser orientado o no orientado.
   <br>
-• Asignar distancias tentativas ds = 0 y di = ∞ para i 6= s. 
+• Asignar distancias tentativas ds = 0 y di = ∞ para i != s. 
 <br>
 • Mientras el destino no esté visitado:
 <br>
   • Seleccionar como nodo actual i el nodo no visitado con menor distancia tentativa, y marcarlo como visitado.
 <br>
-  • Para cada j ∈ N + (i) no visitado, calcular dj0 = di + dij . Si dj0 menor a dj entonces fijar dj := dj0
+  • Para cada vecino del nodo actual, se calcula la distancia tentativa: Sumamos la distancia del nodo actual + el arco del vecino, Si el valor es menos a la distancia tentativa actual -> remplazamos el valor
 <br>
-  • Retornar dt 
-                                                     
+  • Retornar dt (distancia de s a t)                                                     
 </details>
 
 ---
@@ -181,5 +180,6 @@ Porque existen algoritmos **eficientes y correctos** (Dijkstra, Bellman-Ford, Fl
 </details>
 
 ---
+
 
 
