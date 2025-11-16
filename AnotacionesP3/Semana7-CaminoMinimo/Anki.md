@@ -83,6 +83,15 @@ El grafo no debe contener pesos negativos en sus aristas.
 ---
 
 <details>
+<summary><b>¿Cuál es la complejidad del algoritmo de Dijkstra?</b></summary>
+ •Con matriz de adyacencia: `O(n²)`  n= vertices del grafo
+  <br>
+ •Con listas de adyacencia y cola de prioridad: `O(m log n)` donde m es la cantidad de arcos y n la cantidad de nodos
+</details>
+
+---
+
+<details>
 <summary><b>¿Qué estructura de datos se usa para optimizar el algoritmo de Dijkstra?</b></summary>
 Una cola de prioridad (min-heap), que permite extraer el vértice con menor distancia en `O(log V)`.
 </details>
@@ -90,40 +99,11 @@ Una cola de prioridad (min-heap), que permite extraer el vértice con menor dist
 ---
 
 <details>
-<summary><b>¿Cuál es la complejidad del algoritmo de Dijkstra?</b></summary>
-- Con matriz de adyacencia: `O(V²)`  
-- Con listas de adyacencia y cola de prioridad: `O(E log V)`
-</details>
-
----
-
-<details>
 <summary><b>¿Qué sucede si el grafo tiene aristas con pesos negativos?</b></summary>
 El algoritmo de Dijkstra puede fallar, ya que los caminos cortos podrían modificarse después de visitar un vértice.  
-En ese caso, se utiliza Bellman-Ford.
+En ese caso, se utiliza floyd-warshall.
 </details>
 
----
-
-<details>
-<summary><b>¿Cuál es la idea principal del algoritmo de Bellman-Ford?</b></summary>
-Relaja todas las aristas V - 1 veces, garantizando la distancia mínima incluso con aristas de peso negativo.  
-Además, permite detectar ciclos negativos.
-</details>
-
----
-
-<details>
-<summary><b>¿Qué es una operación de relajación en los algoritmos de camino mínimo?</b></summary>
-Es el proceso de actualizar la distancia mínima a un vértice si se encuentra un camino más corto a través de otro vértice intermedio.
-</details>
-
----
-
-<details>
-<summary><b>¿Qué complejidad tiene el algoritmo de Bellman-Ford?</b></summary>
-Tiene una complejidad de **O(V · E)**.
-</details>
 
 ---
 
@@ -176,10 +156,11 @@ Los **subcaminos** de un camino mínimo también son caminos mínimos entre sus 
 
 <details>
 <summary><b>¿Por qué el problema del camino mínimo se considera bien resuelto?</b></summary>
-Porque existen algoritmos **eficientes y correctos** (Dijkstra, Bellman-Ford, Floyd-Warshall) que garantizan soluciones óptimas en tiempo polinomial.
+Porque existen algoritmos **eficientes y correctos** (Dijkstra, Floyd-Warshall) que garantizan soluciones óptimas en tiempo polinomial.
 </details>
 
 ---
+
 
 
 
