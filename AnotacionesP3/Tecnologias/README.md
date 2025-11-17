@@ -4,6 +4,175 @@ Este repositorio contiene resúmenes de conceptos avanzados de programación en 
 
 ---
 
+## 💾 Serialización
+
+### Concepto
+
+**Serialización:** Proceso de convertir un objeto o estructura de datos a un formato que puede ser almacenado o transmitido por red.
+
+**Objetivo:** Recrear el mismo objeto a partir de la información almacenada, en la misma u otra computadora.
+
+### Implementación en Java
+
+**Requisito:** La clase debe implementar la interfaz `Serializable`
+
+```java
+import java.io.Serializable;
+
+public class Persona implements Serializable {
+    private String nombre;
+    private String DNI;
+    private int edad;
+    private static final long serialVersionUID = 1L;
+    
+    public Persona(String n, String d, int e) {
+        nombre = n;
+        DNI = d;
+        edad = e;
+    }
+}
+```
+
+### Escribir Objetos Serializados
+
+```java
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
+try {
+    FileOutputStream fos = new FileOutputStream("personas.txt");
+    ObjectOutputStream out = new ObjectOutputStream(fos);
+    
+    out.writeObject(p1);
+    out.writeObject(p2);
+    out.writeObject(p3);
+    out.close();
+} catch(Exception ex) {
+    ex.printStackTrace();
+}
+```
+
+### Leer Objetos Serializados
+
+```java
+try {
+    FileInputStream fis = new FileInputStream("personas.txt");
+    ObjectInputStream in = new ObjectInputStream(fis);
+    
+    p1 = (Persona) in.readObject();
+    p2 = (Persona) in.readObject();
+    p3 = (Persona) in.readObject();
+    
+    in.close();
+} catch(Exception ex) { ... }
+```
+
+### Serialización de Estructuras
+
+```java
+public class Padron implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private LinkedList<Persona> personas;
+    
+    public Padron() {
+        personas = new LinkedList<Persona>();
+    }
+}
+```
+
+**Importante:** Para que una estructura sea serializable, todas las clases involucradas deben ser serializables.
+
+### Palabra Clave transient
+
+Para evitar que un miembro sea serializado:
+
+```java
+public class Persona implements Serializable {
+    private String nombre;
+    private String DNI;
+    transient private int edad;  // No se serializa
+    private static final long serialVersionUID = 1L;
+}
+```
+
+Al leer los objetos, los campos `transient` tendrán sus valores por defecto (0 para números, null para objetos).
+
+### JSON (JavaScript Object Notation)
+
+Formato liviano para intercambio de datos:
+
+**Características:**
+- Formato de texto, similar a XML
+- Fácil de generar, interpretar y parsear
+- www.json.org
+
+**Ejemplo:**
+```json
+{
+  "nombre": "Juan Perez",
+  "nacionalizado": true,
+  "edad": 25,
+  "direccion": {
+    "calle": "J. M. Gutierrez",
+    "numero": "1150"
+  },
+  "telefonos": [
+    {
+      "tipo": "fijo",
+      "numero": "4675-4781"
+    },
+    {
+      "tipo": "celular",
+      "numero": "15-4535-7651"
+    }
+  ],
+  "conyuge": null
+}
+```
+
+**Generar JSON con Gson:**
+```java
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+public void generarJSON(String archivo) {
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String json = gson.toJson(this);
+    
+    try {
+        FileWriter writer = new FileWriter(archivo);
+        writer.write(json);
+        writer.close();
+    } catch(Exception e) { ... }
+}
+```
+
+**Leer JSON con Gson:**
+```java
+public static ArchivoJSON leerJSON(String archivo) {
+    Gson gson = new Gson();
+    ArchivoJSON ret = null;
+    
+    try {
+        BufferedReader br = new BufferedReader(new FileReader(archivo));
+        ret = gson.fromJson(br, ArchivoJSON.class);
+    } catch(Exception e) { ... }
+    
+    return ret;
+}
+```
+
+### Usos de la Serialización
+
+1. **Persistencia de objetos:** Datos permanentes entre ejecuciones
+   - Nota: Para concurrencia, es mejor usar bases de datos
+
+2. **Comunicación entre procesos:** Enviar objetos de un proceso a otro
+
+3. **Copias de seguridad:** Detectar cambios en los datos
+
+---
+
 ## 📁 Manejo de Archivos en Java
 
 ### Escritura de Archivos de Texto
@@ -234,6 +403,147 @@ Collections.sort(personas, (p,q) -> {
 
 ---
 
+
+## 🌊 Streams
+
+### Concepto
+
+**Stream:** Secuencia de objetos a partir de un origen que soporta operaciones agregadas.
+
+**Características:**
+1. Proporciona acceso secuencial a objetos obtenidos o computados por demanda
+2. No almacena los objetos de la secuencia
+3. El origen puede ser: colección, arreglo, dispositivos I/O, o cálculo iterativo
+4. La mayoría de operaciones retorna el mismo stream (concatenación de operaciones)
+
+### Creación de Streams
+
+**Stream vacío:**
+```java
+Stream<String> streamEmpty = Stream.empty();
+```
+
+**Desde una colección:**
+```java
+ArrayList<String> collection = new ArrayList<String>();
+collection.add(...);
+Stream<String> streamOfCollection = collection.stream();
+```
+
+**Desde un arreglo:**
+```java
+String[] arreglo = new String[]{ "a", "b", "c" };
+Stream<String> streamOfArray = Arrays.stream(arreglo);
+```
+
+**Con valores calculados:**
+```java
+Stream<Integer> streamIterated = Stream.iterate(40, n -> n + 2).limit(20);
+```
+
+**Streams numéricos:**
+```java
+IntStream intStream = IntStream.range(1, 3);      // No incluye el 3
+LongStream longStream = LongStream.rangeClosed(1, 3); // Incluye el 3
+```
+
+**Desde un archivo:**
+```java
+Path path = Paths.get("C:\\file.txt");
+Stream<String> streamOfStrings = Files.lines(path);
+```
+
+### Operaciones Intermedias
+
+Operan con el stream y retornan referencia al mismo stream:
+
+**map():** Aplica un método a cada elemento
+```java
+IntStream.range(1, 10).map(x -> 2*x);
+```
+
+**filter():** Retorna elementos que cumplen la condición
+```java
+IntStream.range(1, 10).filter(x -> x%2 == 0);
+```
+
+**skip(n):** Saltea los n primeros elementos
+```java
+IntStream.range(1, 10).skip(3);
+```
+
+**limit(n):** Obtiene los n primeros elementos
+```java
+IntStream.range(1, 10).skip(3).limit(4);
+```
+
+### Operaciones Terminales
+
+No retornan referencia al stream. Una vez aplicada, el stream no se puede volver a usar.
+
+**forEach():** Aplica un método a cada elemento
+```java
+IntStream.range(1, 10).limit(3).forEach(System.out::println);
+```
+
+**count():** Retorna la cantidad de elementos
+```java
+long cant = IntStream.range(1, 10).filter(x -> x%2 == 0).count();
+```
+
+**Operaciones numéricas:** sum(), min(), max(), average()
+```java
+IntStream.range(1, 10).sum();
+IntStream.range(1, 10).min();
+IntStream.range(1, 10).max();
+IntStream.range(1, 10).average();
+```
+
+**Conversión a stream numérico:**
+```java
+ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+double tot = empleados.stream()
+    .filter(e -> e.getAntiguedad() > 2)
+    .mapToDouble(Empleado::getSueldo)
+    .sum();
+```
+
+**reduce():** Aplica operación binaria sobre todos los elementos
+```java
+IntStream.range(1, 4).reduce((a, b) -> a + b);        // 1+2+3
+IntStream.range(1, 4).reduce(10, (a, b) -> a + b);    // 10+1+2+3
+```
+
+### Importante: Reutilización de Streams
+
+```java
+Stream<String> stream = Stream.of("aa", "ab", "cb").filter(e -> e.contains("b"));
+Optional<String> elemento = stream.findFirst();  // OK
+Optional<String> elemento = stream.findFirst();  // Error! Stream ya usado
+```
+
+### Evaluación Lazy y Orden de Ejecución
+
+- Las operaciones se evalúan por demanda (lazy)
+- Se evalúan de izquierda a derecha
+- **Importante:** Filtrar primero antes de operaciones costosas
+
+```java
+// Ineficiente: map sobre todos los empleados
+empleados.map(a -> operacionCostosa(a)).filter(a -> a.esPropio());
+
+// Eficiente: map solo sobre empleados propios
+empleados.filter(a -> a.esPropio()).map(a -> operacionCostosa(a));
+```
+
+### Cierre de Streams
+
+- Lo habitual: aplicar operación terminal como última operación
+- Si no se hace: cerrar el stream con `close()`
+- Un stream no cerrado ocupa memoria durante toda la ejecución
+
+---
+
 ## 🏛️ Arquitecturas para Interfaces de Usuario
 
 ### Principio: Separated Presentation
@@ -448,175 +758,6 @@ Pattern.compile(regex, flags)
 
 ---
 
-## 💾 Serialización
-
-### Concepto
-
-**Serialización:** Proceso de convertir un objeto o estructura de datos a un formato que puede ser almacenado o transmitido por red.
-
-**Objetivo:** Recrear el mismo objeto a partir de la información almacenada, en la misma u otra computadora.
-
-### Implementación en Java
-
-**Requisito:** La clase debe implementar la interfaz `Serializable`
-
-```java
-import java.io.Serializable;
-
-public class Persona implements Serializable {
-    private String nombre;
-    private String DNI;
-    private int edad;
-    private static final long serialVersionUID = 1L;
-    
-    public Persona(String n, String d, int e) {
-        nombre = n;
-        DNI = d;
-        edad = e;
-    }
-}
-```
-
-### Escribir Objetos Serializados
-
-```java
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
-try {
-    FileOutputStream fos = new FileOutputStream("personas.txt");
-    ObjectOutputStream out = new ObjectOutputStream(fos);
-    
-    out.writeObject(p1);
-    out.writeObject(p2);
-    out.writeObject(p3);
-    out.close();
-} catch(Exception ex) {
-    ex.printStackTrace();
-}
-```
-
-### Leer Objetos Serializados
-
-```java
-try {
-    FileInputStream fis = new FileInputStream("personas.txt");
-    ObjectInputStream in = new ObjectInputStream(fis);
-    
-    p1 = (Persona) in.readObject();
-    p2 = (Persona) in.readObject();
-    p3 = (Persona) in.readObject();
-    
-    in.close();
-} catch(Exception ex) { ... }
-```
-
-### Serialización de Estructuras
-
-```java
-public class Padron implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private LinkedList<Persona> personas;
-    
-    public Padron() {
-        personas = new LinkedList<Persona>();
-    }
-}
-```
-
-**Importante:** Para que una estructura sea serializable, todas las clases involucradas deben ser serializables.
-
-### Palabra Clave transient
-
-Para evitar que un miembro sea serializado:
-
-```java
-public class Persona implements Serializable {
-    private String nombre;
-    private String DNI;
-    transient private int edad;  // No se serializa
-    private static final long serialVersionUID = 1L;
-}
-```
-
-Al leer los objetos, los campos `transient` tendrán sus valores por defecto (0 para números, null para objetos).
-
-### JSON (JavaScript Object Notation)
-
-Formato liviano para intercambio de datos:
-
-**Características:**
-- Formato de texto, similar a XML
-- Fácil de generar, interpretar y parsear
-- www.json.org
-
-**Ejemplo:**
-```json
-{
-  "nombre": "Juan Perez",
-  "nacionalizado": true,
-  "edad": 25,
-  "direccion": {
-    "calle": "J. M. Gutierrez",
-    "numero": "1150"
-  },
-  "telefonos": [
-    {
-      "tipo": "fijo",
-      "numero": "4675-4781"
-    },
-    {
-      "tipo": "celular",
-      "numero": "15-4535-7651"
-    }
-  ],
-  "conyuge": null
-}
-```
-
-**Generar JSON con Gson:**
-```java
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-public void generarJSON(String archivo) {
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    String json = gson.toJson(this);
-    
-    try {
-        FileWriter writer = new FileWriter(archivo);
-        writer.write(json);
-        writer.close();
-    } catch(Exception e) { ... }
-}
-```
-
-**Leer JSON con Gson:**
-```java
-public static ArchivoJSON leerJSON(String archivo) {
-    Gson gson = new Gson();
-    ArchivoJSON ret = null;
-    
-    try {
-        BufferedReader br = new BufferedReader(new FileReader(archivo));
-        ret = gson.fromJson(br, ArchivoJSON.class);
-    } catch(Exception e) { ... }
-    
-    return ret;
-}
-```
-
-### Usos de la Serialización
-
-1. **Persistencia de objetos:** Datos permanentes entre ejecuciones
-   - Nota: Para concurrencia, es mejor usar bases de datos
-
-2. **Comunicación entre procesos:** Enviar objetos de un proceso a otro
-
-3. **Copias de seguridad:** Detectar cambios en los datos
-
----
-
 ## 🌐 Sockets en Java
 
 ### Protocolo TCP/IP
@@ -685,146 +826,6 @@ System.out.println("El server dice: " + str);
 ```
 
 **Codificación UTF:** Permite representar strings de modo independiente del hardware, indicando la cantidad de bytes transmitidos para saber cuándo se completó el mensaje.
-
----
-
-## 🌊 Streams
-
-### Concepto
-
-**Stream:** Secuencia de objetos a partir de un origen que soporta operaciones agregadas.
-
-**Características:**
-1. Proporciona acceso secuencial a objetos obtenidos o computados por demanda
-2. No almacena los objetos de la secuencia
-3. El origen puede ser: colección, arreglo, dispositivos I/O, o cálculo iterativo
-4. La mayoría de operaciones retorna el mismo stream (concatenación de operaciones)
-
-### Creación de Streams
-
-**Stream vacío:**
-```java
-Stream<String> streamEmpty = Stream.empty();
-```
-
-**Desde una colección:**
-```java
-ArrayList<String> collection = new ArrayList<String>();
-collection.add(...);
-Stream<String> streamOfCollection = collection.stream();
-```
-
-**Desde un arreglo:**
-```java
-String[] arreglo = new String[]{ "a", "b", "c" };
-Stream<String> streamOfArray = Arrays.stream(arreglo);
-```
-
-**Con valores calculados:**
-```java
-Stream<Integer> streamIterated = Stream.iterate(40, n -> n + 2).limit(20);
-```
-
-**Streams numéricos:**
-```java
-IntStream intStream = IntStream.range(1, 3);      // No incluye el 3
-LongStream longStream = LongStream.rangeClosed(1, 3); // Incluye el 3
-```
-
-**Desde un archivo:**
-```java
-Path path = Paths.get("C:\\file.txt");
-Stream<String> streamOfStrings = Files.lines(path);
-```
-
-### Operaciones Intermedias
-
-Operan con el stream y retornan referencia al mismo stream:
-
-**map():** Aplica un método a cada elemento
-```java
-IntStream.range(1, 10).map(x -> 2*x);
-```
-
-**filter():** Retorna elementos que cumplen la condición
-```java
-IntStream.range(1, 10).filter(x -> x%2 == 0);
-```
-
-**skip(n):** Saltea los n primeros elementos
-```java
-IntStream.range(1, 10).skip(3);
-```
-
-**limit(n):** Obtiene los n primeros elementos
-```java
-IntStream.range(1, 10).skip(3).limit(4);
-```
-
-### Operaciones Terminales
-
-No retornan referencia al stream. Una vez aplicada, el stream no se puede volver a usar.
-
-**forEach():** Aplica un método a cada elemento
-```java
-IntStream.range(1, 10).limit(3).forEach(System.out::println);
-```
-
-**count():** Retorna la cantidad de elementos
-```java
-long cant = IntStream.range(1, 10).filter(x -> x%2 == 0).count();
-```
-
-**Operaciones numéricas:** sum(), min(), max(), average()
-```java
-IntStream.range(1, 10).sum();
-IntStream.range(1, 10).min();
-IntStream.range(1, 10).max();
-IntStream.range(1, 10).average();
-```
-
-**Conversión a stream numérico:**
-```java
-ArrayList<Empleado> empleados = new ArrayList<Empleado>();
-double tot = empleados.stream()
-    .filter(e -> e.getAntiguedad() > 2)
-    .mapToDouble(Empleado::getSueldo)
-    .sum();
-```
-
-**reduce():** Aplica operación binaria sobre todos los elementos
-```java
-IntStream.range(1, 4).reduce((a, b) -> a + b);        // 1+2+3
-IntStream.range(1, 4).reduce(10, (a, b) -> a + b);    // 10+1+2+3
-```
-
-### Importante: Reutilización de Streams
-
-```java
-Stream<String> stream = Stream.of("aa", "ab", "cb").filter(e -> e.contains("b"));
-Optional<String> elemento = stream.findFirst();  // OK
-Optional<String> elemento = stream.findFirst();  // Error! Stream ya usado
-```
-
-### Evaluación Lazy y Orden de Ejecución
-
-- Las operaciones se evalúan por demanda (lazy)
-- Se evalúan de izquierda a derecha
-- **Importante:** Filtrar primero antes de operaciones costosas
-
-```java
-// Ineficiente: map sobre todos los empleados
-empleados.map(a -> operacionCostosa(a)).filter(a -> a.esPropio());
-
-// Eficiente: map solo sobre empleados propios
-empleados.filter(a -> a.esPropio()).map(a -> operacionCostosa(a));
-```
-
-### Cierre de Streams
-
-- Lo habitual: aplicar operación terminal como última operación
-- Si no se hace: cerrar el stream con `close()`
-- Un stream no cerrado ocupa memoria durante toda la ejecución
 
 ---
 
@@ -970,3 +971,4 @@ La llamada a `join()` pausa el thread llamador hasta que el thread llamado termi
 - Java Documentation - java.io
 - World Wide Web Consortium - XML
 - www.json.org
+
