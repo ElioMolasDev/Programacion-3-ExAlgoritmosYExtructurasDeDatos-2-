@@ -75,15 +75,6 @@ Diseño de redes eléctricas y de comunicación, donde se busca conectar todos l
 
 ## ⚙️ Algoritmo de Prim
 
-<details>
-<summary>¿Quiénes desarrollaron el algoritmo de Prim?</summary>
-Fue descubierto independientemente por:
-<ul>
-<li>Vojtěch Jarník (1930)</li>
-<li>Robert Prim (1957)</li>
-<li>Edsger Dijkstra (1959)</li>
-</ul>
-</details>
 
 <details>
 <summary>¿Cuál es la idea principal del algoritmo de Prim?</summary>
@@ -121,14 +112,14 @@ Sí, el algoritmo de Prim es correcto. Dado un grafo G conexo, siempre determina
 Sea F un subconjunto de aristas en un AGM de G, y sea S un conjunto de vértices de una componente conexa de F. Sea ij una arista de peso mínimo entre S y S̄. Entonces, existe un AGM de G que incluye a todas las aristas de F ∪ {ij}.
 </details>
 
+<details>
+<summary>¿Cual es la complejidad del algoritmo de Prim?</summary>
+   Sobre matriz de adyacencia O(n.m) n² si el grafo es denso
+</details>
+
 ---
 
 ## ⚙️ Algoritmo de Kruskal
-
-<details>
-<summary>¿Quién desarrolló el algoritmo de Kruskal y cuándo?</summary>
-Joseph Kruskal lo desarrolló en 1956.
-</details>
 
 <details>
 <summary>¿Cuál es la idea principal del algoritmo de Kruskal?</summary>
@@ -166,6 +157,14 @@ Joseph Kruskal lo desarrolló en 1956.
 <b>Prim:</b> Mejor para grafos densos
 <br>
 <b>Kruskal:</b> Mejor para grafos dispersos
+</details>
+
+<details>
+<summary>¿Cual es la complejidad de algoritmo de Kruskal?</summary>
+•O(n.m) sin implementar Union-find
+   <br>
+•
+•
 </details>
 
 ---
@@ -296,3 +295,4 @@ Sea P<sub>ij</sub> un camino mínimo entre i y j, y sea k ∈ P<sub>ij</sub>. En
 <summary>¿Qué garantiza que Prim y Kruskal encuentren un AGM?</summary>
 Ambos algoritmos se basan en el teorema de que la arista de peso mínimo que conecta dos componentes conexas puede agregarse sin perder la propiedad de AGM.
 </details>
+
