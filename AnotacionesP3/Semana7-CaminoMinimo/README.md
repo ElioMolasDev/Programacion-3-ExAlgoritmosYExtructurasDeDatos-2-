@@ -24,8 +24,6 @@ El camino mínimo entre dos vértices u y v en un grafo ponderado es la secuenci
 
 * Dijkstra: Encuentra el camino mínimo desde una fuente a todos los vértices en grafos con pesos no negativos. Utiliza una cola de prioridad y tiene complejidad O(E log V).
 
-* Bellman-Ford: Permite pesos negativos, detecta ciclos negativos y tiene complejidad O(V·E).
-
 * Floyd-Warshall: Calcula caminos mínimos entre todos los pares de vértices, útil para grafos pequeños o densos.
 Su complejidad es O(V³).
 
