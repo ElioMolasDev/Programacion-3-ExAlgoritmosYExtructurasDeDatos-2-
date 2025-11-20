@@ -15,10 +15,12 @@ En esta carpeta se encuentran los apuntes de los principales temas de la materia
 - [Problemas NP](./Semana9-ProblemasNP/README.md)
 - [Algoritmos Golosos](./Semana10-AlgoritmosGolosos/README.md)
 - [Algoritmo geneticos](./Semana11-AlgoritmosGeneticos/README.md)
+- [Tecnologias](./Tecnologias/README.md)
 
 Cada sección incluye:
 - Explicación teórica resumida
 - Preguntas y respuestas tipo Anki
 - Ejemplos prácticos de código
+
 
 
