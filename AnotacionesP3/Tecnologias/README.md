@@ -4,6 +4,414 @@ Este repositorio contiene resúmenes de conceptos avanzados de programación en 
 
 ---
 
+# Principios SOLID en Java
+
+Los principios SOLID son cinco principios de diseño orientado a objetos que hacen el software más mantenible, flexible y escalable.
+
+## 1. S - Single Responsibility Principle (Principio de Responsabilidad Única)
+
+Una clase debe tener una sola razón para cambiar, es decir, una única responsabilidad.
+
+### Ejemplo incorrecto:
+
+```java
+public class Empleado {
+    private String nombre;
+    private double salario;
+    
+    public Empleado(String nombre, double salario) {
+        this.nombre = nombre;
+        this.salario = salario;
+    }
+    
+    public void guardarEnBaseDatos() {
+        // Lógica para guardar en BD
+        System.out.println("Guardando empleado " + nombre + " en la base de datos");
+    }
+    
+    public void calcularImpuestos() {
+        // Cálculo de impuestos
+        double impuesto = salario * 0.30;
+        System.out.println("Impuesto calculado: " + impuesto);
+    }
+    
+    public void generarReciboPago() {
+        // Generación de recibo
+        System.out.println("Generando recibo de pago para " + nombre);
+    }
+}
+```
+
+**Problema:** La clase Empleado tiene múltiples responsabilidades: gestión de datos, persistencia, cálculos fiscales y generación de documentos.
+
+### Solución:
+
+```java
+public class Empleado {
+    private String nombre;
+    private double salario;
+    
+    public Empleado(String nombre, double salario) {
+        this.nombre = nombre;
+        this.salario = salario;
+    }
+    
+    public String getNombre() { return nombre; }
+    public double getSalario() { return salario; }
+}
+
+public class EmpleadoRepository {
+    public void guardar(Empleado empleado) {
+        System.out.println("Guardando empleado " + empleado.getNombre() + " en la base de datos");
+    }
+}
+
+public class CalculadoraImpuestos {
+    public double calcular(Empleado empleado) {
+        return empleado.getSalario() * 0.30;
+    }
+}
+
+public class GeneradorRecibos {
+    public void generar(Empleado empleado) {
+        System.out.println("Generando recibo de pago para " + empleado.getNombre());
+    }
+}
+```
+
+---
+
+## 2. O - Open/Closed Principle (Principio Abierto/Cerrado)
+
+Las clases deben estar abiertas para extensión pero cerradas para modificación.
+
+### Ejemplo incorrecto:
+
+```java
+public class ProcesadorPago {
+    public void procesarPago(String metodoPago, double monto) {
+        if (metodoPago.equals("tarjeta")) {
+            System.out.println("Procesando pago con tarjeta: $" + monto);
+        } else if (metodoPago.equals("paypal")) {
+            System.out.println("Procesando pago con PayPal: $" + monto);
+        } else if (metodoPago.equals("bitcoin")) {
+            System.out.println("Procesando pago con Bitcoin: $" + monto);
+        }
+        // Si agregamos un nuevo método, debemos modificar esta clase
+    }
+}
+```
+
+**Problema:** Cada vez que agregamos un nuevo método de pago, debemos modificar la clase existente.
+
+### Solución:
+
+```java
+public interface MetodoPago {
+    void procesar(double monto);
+}
+
+public class PagoTarjeta implements MetodoPago {
+    @Override
+    public void procesar(double monto) {
+        System.out.println("Procesando pago con tarjeta: $" + monto);
+    }
+}
+
+public class PagoPayPal implements MetodoPago {
+    @Override
+    public void procesar(double monto) {
+        System.out.println("Procesando pago con PayPal: $" + monto);
+    }
+}
+
+public class PagoBitcoin implements MetodoPago {
+    @Override
+    public void procesar(double monto) {
+        System.out.println("Procesando pago con Bitcoin: $" + monto);
+    }
+}
+
+public class ProcesadorPago {
+    private MetodoPago metodoPago;
+    
+    public ProcesadorPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+    
+    public void procesar(double monto) {
+        metodoPago.procesar(monto);
+    }
+}
+```
+
+---
+
+## 3. L - Liskov Substitution Principle (Principio de Sustitución de Liskov)
+
+Los objetos de una clase derivada deben poder reemplazar objetos de la clase base sin alterar el comportamiento del programa.
+
+### Ejemplo incorrecto:
+
+```java
+public class Rectangulo {
+    protected int ancho;
+    protected int alto;
+    
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
+    }
+    
+    public void setAlto(int alto) {
+        this.alto = alto;
+    }
+    
+    public int calcularArea() {
+        return ancho * alto;
+    }
+}
+
+public class Cuadrado extends Rectangulo {
+    @Override
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
+        this.alto = ancho;  // Viola el principio
+    }
+    
+    @Override
+    public void setAlto(int alto) {
+        this.ancho = alto;  // Viola el principio
+        this.alto = alto;
+    }
+}
+```
+
+**Problema:** Cuadrado modifica el comportamiento esperado de Rectangulo, rompiendo la sustitución.
+
+### Solución:
+
+```java
+public interface Forma {
+    int calcularArea();
+}
+
+public class Rectangulo implements Forma {
+    private int ancho;
+    private int alto;
+    
+    public Rectangulo(int ancho, int alto) {
+        this.ancho = ancho;
+        this.alto = alto;
+    }
+    
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
+    }
+    
+    public void setAlto(int alto) {
+        this.alto = alto;
+    }
+    
+    @Override
+    public int calcularArea() {
+        return ancho * alto;
+    }
+}
+
+public class Cuadrado implements Forma {
+    private int lado;
+    
+    public Cuadrado(int lado) {
+        this.lado = lado;
+    }
+    
+    public void setLado(int lado) {
+        this.lado = lado;
+    }
+    
+    @Override
+    public int calcularArea() {
+        return lado * lado;
+    }
+}
+```
+
+---
+
+## 4. I - Interface Segregation Principle (Principio de Segregación de Interfaces)
+
+Los clientes no deberían verse obligados a depender de interfaces que no utilizan.
+
+### Ejemplo incorrecto:
+
+```java
+public interface Vehiculo {
+    void conducir();
+    void volar();
+    void navegar();
+}
+
+public class Coche implements Vehiculo {
+    @Override
+    public void conducir() {
+        System.out.println("Conduciendo el coche");
+    }
+    
+    @Override
+    public void volar() {
+        throw new UnsupportedOperationException("Los coches no vuelan");
+    }
+    
+    @Override
+    public void navegar() {
+        throw new UnsupportedOperationException("Los coches no navegan");
+    }
+}
+```
+
+**Problema:** Coche se ve obligado a implementar métodos que no necesita.
+
+### Solución:
+
+```java
+public interface Conducible {
+    void conducir();
+}
+
+public interface Volable {
+    void volar();
+}
+
+public interface Navegable {
+    void navegar();
+}
+
+public class Coche implements Conducible {
+    @Override
+    public void conducir() {
+        System.out.println("Conduciendo el coche");
+    }
+}
+
+public class Avion implements Conducible, Volable {
+    @Override
+    public void conducir() {
+        System.out.println("Rodando en la pista");
+    }
+    
+    @Override
+    public void volar() {
+        System.out.println("Volando el avión");
+    }
+}
+
+public class Barco implements Navegable {
+    @Override
+    public void navegar() {
+        System.out.println("Navegando el barco");
+    }
+}
+```
+
+---
+
+## 5. D - Dependency Inversion Principle (Principio de Inversión de Dependencias)
+
+Las clases de alto nivel no deben depender de clases de bajo nivel. Ambas deben depender de abstracciones.
+
+### Ejemplo incorrecto:
+
+```java
+public class AccesoMySQL {
+    public void conectar() {
+        System.out.println("Conectando a MySQL");
+    }
+    
+    public String obtenerDatos() {
+        return "Datos de MySQL";
+    }
+}
+
+public class ServicioProductos {
+    private AccesoMySQL baseDatos;
+    
+    public ServicioProductos() {
+        this.baseDatos = new AccesoMySQL();  // Dependencia directa
+    }
+    
+    public void listarProductos() {
+        baseDatos.conectar();
+        String datos = baseDatos.obtenerDatos();
+        System.out.println(datos);
+    }
+}
+```
+
+**Problema:** ServicioProductos depende directamente de una implementación concreta, dificulta cambiar de base de datos.
+
+### Solución:
+
+```java
+public interface BaseDatos {
+    void conectar();
+    String obtenerDatos();
+}
+
+public class AccesoMySQL implements BaseDatos {
+    @Override
+    public void conectar() {
+        System.out.println("Conectando a MySQL");
+    }
+    
+    @Override
+    public String obtenerDatos() {
+        return "Datos de MySQL";
+    }
+}
+
+public class AccesoPostgreSQL implements BaseDatos {
+    @Override
+    public void conectar() {
+        System.out.println("Conectando a PostgreSQL");
+    }
+    
+    @Override
+    public String obtenerDatos() {
+        return "Datos de PostgreSQL";
+    }
+}
+
+public class ServicioProductos {
+    private BaseDatos baseDatos;
+    
+    public ServicioProductos(BaseDatos baseDatos) {
+        this.baseDatos = baseDatos;  // Inyección de dependencia
+    }
+    
+    public void listarProductos() {
+        baseDatos.conectar();
+        String datos = baseDatos.obtenerDatos();
+        System.out.println(datos);
+    }
+}
+
+// Uso
+public class Main {
+    public static void main(String[] args) {
+        BaseDatos db = new AccesoPostgreSQL();
+        ServicioProductos servicio = new ServicioProductos(db);
+        servicio.listarProductos();
+    }
+}
+```
+
+
+## Conclusión
+
+Estos principios trabajan juntos para crear código más limpio, modular y fácil de mantener. Aplicarlos correctamente facilita las pruebas, reduce el acoplamiento y aumenta la cohesión del código.
+
+---
+
 ## 💾 Serialización
 
 ### Concepto
@@ -971,4 +1379,5 @@ La llamada a `join()` pausa el thread llamador hasta que el thread llamado termi
 - Java Documentation - java.io
 - World Wide Web Consortium - XML
 - www.json.org
+
 
